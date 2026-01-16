@@ -1,18 +1,16 @@
-# Projeto C – Controle de Finanças Pessoais
+# 💰 Controle de Finanças Pessoais (Projeto C)
 
-## Descrição
-Este sistema é uma aplicação de linha de comando desenvolvida em Python para gerenciar finanças pessoais. Ele permite o registro de receitas e despesas com armazenamento persistente em arquivos CSV.
+Sistema de linha de comando desenvolvido em **Python** para gestão de receitas e despesas. Este projeto consolida conceitos de Programação Orientada a Objetos (POO) e manipulação de arquivos CSV.
 
-## Principais Funcionalidades
-* **Registro de Transações**: Cadastro de ID, tipo (receita/despesa), valor, data, categoria e descrição.
-* **Persistência de Dados**: Leitura e escrita automática no arquivo `transacoes.csv`.
-* **Cálculo de Saldo**: O sistema calcula o saldo líquido atual baseado nas entradas e saídas.
-* **Validação OO**: Uso de Programação Orientada a Objetos com Getters e Setters para validar dados.
+## ⚙️ Funcionalidades
+* **Cadastro de Transações:** Registro completo com ID, tipo (receita/despesa), valor, data, categoria e descrição.
+* **Persistência de Dados:** Carregamento e salvamento automático em arquivo `csv`.
+* **Cálculo de Saldo:** Processamento do saldo líquido atual da conta.
+* **Validações:** Uso de Propriedades para garantir integridade dos dados (ex: datas no formato dd/mm/aaaa).
 
-## Estrutura de Diretórios
-* `src/`: Códigos fonte (.py).
-* `data/`: Arquivos de dados (.csv).
+## 📂 Estrutura do Projeto
+* `src/`: Contém os módulos `main.py`, `models.py` e `repositorio_transacoes.py`.
+* `dados/`: Pasta destinada ao arquivo `transacoes.csv`.
 
-## Como Executar
-1. Navegue até a pasta `src/`.
-2. Execute o comando: `python main.py`
+## 🛠️ Como Executar
+
