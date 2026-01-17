@@ -12,16 +12,22 @@ def salvar_transacoes(lista_transacoes, nome_arquivo='dados/transacoes.csv'):
 
 def carregar_transacoes(nome_arquivo='dados/transacoes.csv'):
     transacoes = []
-    with open(nome_arquivo, 'r', encoding='utf-8') as arquivo:
-        for linha in arquivo:
-            dados = linha.strip().split(',')
-            if len(dados) != 6:
-                continue
-            nova_transacao = Transacao(id=int(dados[0]),
+
+
+    try:
+        with open(nome_arquivo, 'r', encoding='utf-8') as arquivo:
+            for linha in arquivo:
+                dados = linha.strip().split(',')
+                if len(dados) != 6:
+                    continue
+                nova_transacao = Transacao(id=int(dados[0]),
                                        tipo=dados[1],
                                        valor=float(dados[2]),
                                        data=dados[3],
                                        categoria=dados[4],
                                        descricao=dados[5])
-            transacoes.append(nova_transacao)
+                transacoes.append(nova_transacao)
+    except FileNotFoundError:
+        return []
+    
     return transacoes
