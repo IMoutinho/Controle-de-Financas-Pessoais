@@ -1,7 +1,8 @@
 '''Define a classe Transacao que representa uma transação financeira (id, valor, tipo, data, categoria, descrição). Além disso, inclui validações para
 garantir que os dados inseridos sejam consistentes.'''
 
-from datetime import datetime
+from datetime import datetime, date
+
 
 class Transacao:
     def __init__(self, id, valor, tipo, data, categoria, descricao):
@@ -44,7 +45,7 @@ class Transacao:
         if not isinstance(valor_id, int) or valor_id <= 0:
             raise ValueError('ID deve ser um inteiro positivo.')
         self._id = valor_id
-        
+
     # Verifica se o valor é numérico e positivo
     @valor.setter
     def valor(self, valor_num):
@@ -62,10 +63,17 @@ class Transacao:
 
     @data.setter
     def data(self, valor_data):
-        try:
-            data_convertida = datetime.strptime(valor_data, "%d/%m/%Y")
-            self._data = data_convertida
-        except ValueError:
+        if isinstance(valor_data, (datetime, date)):
+            self._data = valor_data
+
+        elif isinstance(valor_data, str):
+            try:
+                self._data = datetime.strptime(valor_data, "%d/%m/%Y")
+            except ValueError:
+                print(f"Data inválida. Utilizando a data atual")
+                self._data = datetime.now()
+
+        else:
             raise ValueError('Data deve estar no formato DD/MM/AAAA.')
 
     @categoria.setter

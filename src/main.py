@@ -2,6 +2,7 @@
 
 from repositorio_transacoes import carregar_transacoes, salvar_transacoes
 from operacoes import registrar_transacao, calcular_saldo, exibir_relatorios
+from relatorios import exibir_transacoes
 
 
 def exibir_menu():
@@ -24,8 +25,7 @@ def main():
             registrar_transacao(lista_transacoes)
 
         elif opcao == '2':
-            for transacao in lista_transacoes:
-                print(transacao)
+            exibir_transacoes(lista_transacoes)
 
         elif opcao == '3':
             calcular_saldo(lista_transacoes)

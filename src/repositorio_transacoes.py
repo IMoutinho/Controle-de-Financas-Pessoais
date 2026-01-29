@@ -13,7 +13,6 @@ def salvar_transacoes(lista_transacoes, nome_arquivo='dados/transacoes.csv'):
 def carregar_transacoes(nome_arquivo='dados/transacoes.csv'):
     transacoes = []
 
-
     try:
         with open(nome_arquivo, 'r', encoding='utf-8') as arquivo:
             for linha in arquivo:
@@ -23,7 +22,7 @@ def carregar_transacoes(nome_arquivo='dados/transacoes.csv'):
                 nova_transacao = Transacao(id=int(dados[0]),
                                        tipo=dados[1],
                                        valor=float(dados[2]),
-                                       data=dados[3],
+                                       data=datetime.strptime(dados[3], '%d/%m/%Y'),
                                        categoria=dados[4],
                                        descricao=dados[5])
                 transacoes.append(nova_transacao)
