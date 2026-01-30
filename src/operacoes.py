@@ -3,14 +3,14 @@
 from relatorios import exibir_relatorio_categoria, exibir_relatorio_mes_ano, exibir_relatorio_categoriaEscolhida, exibir_relatorio_mes_escolhido
 from models import Transacao
 import constantes
+from utils import ler_tipo, ler_valor, ler_data
 
 
 def registrar_transacao(lista_transacoes):
     print("Digite os detalhes da transação:")
-    tipo = input(
-        "Digite o tipo da transação (receita/despesa): ").strip().lower()
-    valor = float(input("Digite o valor da transação: "))
-    data = input("Digite a data da transação (DD/MM/AAAA):")
+    tipo = ler_tipo()
+    valor = ler_valor()
+    data = ler_data()
     categoria = selecionar_categoria(tipo)
     descricao = input("Digite uma descrição para a transação: ")
     nova_transacao = Transacao(

@@ -23,6 +23,7 @@ def main():
 
         if opcao == '1':
             registrar_transacao(lista_transacoes)
+            salvar_transacoes(lista_transacoes)
 
         elif opcao == '2':
             exibir_transacoes(lista_transacoes)

@@ -1,9 +1,10 @@
 '''funcões para resumo de categoria/mês/ano'''
 
-# r_categoria inicializa um dicionario. A função recebe lista_transacoes que contem todas as transações. A lista é percorrida em um for. é feita uma checagem
-# se não existe categoria pra transacao da lista ou nao há transacao na lista o valor atribuido é zero. Do contrario, se for despesa diminui do saldo, se for receita soma
+''' r_categoria inicializa um dicionario. A função recebe lista_transacoes que contem todas as transações. A lista é percorrida em um for. é feita uma checagem
+ se não existe categoria pra transacao da lista ou nao há transacao na lista o valor atribuido é zero. Do contrario, se for despesa diminui do saldo, se for receita soma'''
 
 
+from utils import calcula_periodo
 def relatorio_categoria(lista_transacoes):
     r_categoria = {}
     for transacao in lista_transacoes:
@@ -49,41 +50,44 @@ def relatorio_categoriaEscolhida(lista_transacoes, categoria_escolhida):
 
 def relatorio_meses(lista_transacoes):
     r_mes_ano = {}
+    d_mes_ano = {}
     for transacao in lista_transacoes:
         mes_ano = transacao.data.strftime('%m/%Y')
         if mes_ano not in r_mes_ano:
             r_mes_ano[mes_ano] = 0.0
+            d_mes_ano[mes_ano] = 0.0
 
         if transacao.tipo == 'receita':
             r_mes_ano[mes_ano] += transacao.valor
         else:
-            r_mes_ano[mes_ano] -= transacao.valor
+            d_mes_ano[mes_ano] -= transacao.valor
 
-    return r_mes_ano
+    return r_mes_ano, d_mes_ano
 
 
 def relatorio_mes_escolhido(lista_transacoes, mes_ano_escolhido):
-    total = 0.0
+    total_receita = 0.0
+    total_despesa = 0.0
     for transacao in lista_transacoes:
         mes_ano = transacao.data.strftime('%m/%Y')
         if mes_ano == mes_ano_escolhido:
             if transacao.tipo == 'receita':
-                total += transacao.valor
+                total_receita += transacao.valor
             else:
-                total -= transacao.valor
-    return total
+                total_despesa -= transacao.valor
+    return total_receita, total_despesa
 
 
 def exibir_transacoes(lista_transacoes):
     print("\n===========================================")
-    print('--- Todas Transações ---')
+    print(f"{'--- TODAS TRANSAÇÕES ---':^40}")
 
     for transacao in lista_transacoes:
         print("\n-------------------------------------------")
         print('ID: ', transacao.id)
         print('Tipo: ', transacao.tipo)
         print('Valor: R$', transacao.valor)
-        print('Data: ', transacao.data)
+        print('Data: ', transacao.data.strftime('%d/%m/%Y'))
 
 
 def exibir_relatorio_categoria(lista_transacoes):
@@ -105,23 +109,43 @@ def exibir_relatorio_categoria(lista_transacoes):
 
 def exibir_relatorio_categoriaEscolhida(lista_transacoes, categoria_escolhida):
     total = relatorio_categoriaEscolhida(lista_transacoes, categoria_escolhida)
-    print(f"\n--- Relatório para Categoria: {categoria_escolhida} ---")
+    inicio, fim = calcula_periodo(lista_transacoes, categoria_escolhida)
+    print("\n===============================================")
+    print(f"--- Relatório para Categoria: {categoria_escolhida} ---")
+    print("-------------------------------------------")
+
+    if inicio is not None and fim is not None:
+        d_inicio = inicio.strftime('%d/%m/%Y')
+        d_fim = fim.strftime('%d/%m/%Y')
+        print(f"Período apurado: {d_inicio} até {d_fim}")
+    else:
+        print("Período apurado: Nenhuma movimentação registrada.")
+
     print(f"Total: R$ {total:.2f}")
+    print("\n===============================================\n")
 
 
 def exibir_relatorio_mes_ano(lista_transacoes):
-    r_mes_ano = relatorio_meses(lista_transacoes)
-    print("\n===========================================")
-    print(f"{'RELATÓRIO MÊS/ANO':^40}")
-    print("-------------------------------------------")
-    print(f"{'MÊS/ANO':<25}|{'TOTAL (R$)':>12}")
-    print("\n-------------------------------------------")
-    for mes_ano, total in r_mes_ano.items():
-        print(f"{mes_ano:<25}|{total:>12.2f}")
-    print("\n===========================================")
+    r_mes_ano, d_mes_ano = relatorio_meses(lista_transacoes)
+    print("\n=========================================================")
+    print(f"{'RELATÓRIO DETALHADO MÊS/ANO':^62}")
+    print("---------------------------------------------------------")
+    print(f"{'MÊS/ANO':<10} | {'RECEITAS':>12} | {'DESPESAS':>12} | {'SALDO DO MÊS':>12}")
+    print("---------------------------------------------------------")
+    for mes_ano in r_mes_ano.keys():
+        receita = r_mes_ano[mes_ano]
+        despesa = d_mes_ano[mes_ano]
+        saldo = receita+despesa
+        print(f"{mes_ano:<10} | {receita:>12.2f} | {despesa:>12.2f} | {saldo:>12.2f}")
+    print("\n=========================================================")
 
 
 def exibir_relatorio_mes_escolhido(lista_transacoes, mes_ano_escolhido):
-    total = relatorio_mes_escolhido(lista_transacoes, mes_ano_escolhido)
+    total_receita, total_despesa = relatorio_mes_escolhido(
+        lista_transacoes, mes_ano_escolhido)
+    print("\n=================================")
     print(f"\n--- Relatório para Mês/Ano: {mes_ano_escolhido} ---")
-    print(f"Total: R$ {total:.2f}")
+    print(f"Total receitas:: R$ {total_receita:.2f} \n")
+    print("+++++++++++++++++++++++++++++++++")
+    print(f"Total despesas:: R$ {total_despesa:.2f} \n")
+    print("=================================")
