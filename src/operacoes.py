@@ -1,4 +1,4 @@
-'''Modulo que terá todas as funções utilizadas no main'''
+'''Módulo criado com algumas operações basicas utilizadas em outras funções, como registrar transaçõa na lista de transações, o menu de relatórios e seleção'''
 
 from relatorios import exibir_relatorio_categoria, exibir_relatorio_mes_ano, exibir_relatorio_categoriaEscolhida, exibir_relatorio_mes_escolhido
 from models import Transacao
@@ -7,6 +7,7 @@ from utils import ler_tipo, ler_valor, ler_data
 
 
 def registrar_transacao(lista_transacoes):
+    '''Função para registrar a transação dentro da estrutura criada e adicionar essa transação ao final da lista de transações'''
     print("Digite os detalhes da transação:")
     tipo = ler_tipo()
     valor = ler_valor()
@@ -26,6 +27,7 @@ def registrar_transacao(lista_transacoes):
 
 
 def calcular_saldo(lista_transacoes):
+    '''função para calculo do saldo total, recebe a lista de transações, identifica se a transação é uma receita ou despesa e executa o calculo conforme o tipo'''
     saldo = 0
     for transacao in lista_transacoes:
         if transacao.tipo == 'receita':
@@ -38,6 +40,7 @@ def calcular_saldo(lista_transacoes):
 
 
 def exibir_relatorios(lista_transacoes):
+    '''menu criado para apresentar as opções de relatório '''
     relatorio_opcao = -1
     while relatorio_opcao != 0:
         print("\n--- Relatórios ---")
@@ -66,6 +69,8 @@ def exibir_relatorios(lista_transacoes):
 
 
 def selecionar_categoria(tipo):
+    '''função para seleção de categorias definidas no modulo de constantes. Verifica qual tipo foi selecionado e apresenta as categorias para evitar que o usuario selecione 
+    alguma categoria inexistete'''
     if tipo == 'receita':
         categorias = constantes.categorias_definidas['receita']
     else:

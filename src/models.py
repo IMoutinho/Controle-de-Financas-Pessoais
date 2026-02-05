@@ -5,6 +5,7 @@ from datetime import datetime, date
 
 
 class Transacao:
+    '''definição de transação com os atributos de id, valor, tipo, data, categoria e descrição'''
     def __init__(self, id, valor, tipo, data, categoria, descricao):
         self.id = id
         self.valor = valor

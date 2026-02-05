@@ -1,11 +1,11 @@
 '''funcões para resumo de categoria/mês/ano'''
 
-''' r_categoria inicializa um dicionario. A função recebe lista_transacoes que contem todas as transações. A lista é percorrida em um for. é feita uma checagem
- se não existe categoria pra transacao da lista ou nao há transacao na lista o valor atribuido é zero. Do contrario, se for despesa diminui do saldo, se for receita soma'''
-
-
 from utils import calcula_periodo
+
+
 def relatorio_categoria(lista_transacoes):
+    '''r_categoria inicializa um dicionario. A função recebe lista_transacoes que contem todas as transações. A lista é percorrida em um for. é feita uma checagem
+    se não existe categoria pra transacao da lista ou nao há transacao na lista o valor atribuido é zero. Do contrario, se for despesa diminui do saldo, se for receita soma'''
     r_categoria = {}
     for transacao in lista_transacoes:
 
@@ -31,8 +31,8 @@ def relatorio_categoria(lista_transacoes):
     return r_categoria
 
 
-# inicializa a variavel total com 0, loop for que percorre todas transacoes na lista de transacoes. Como recebe categoria_escolhida, ele verifica se a transacao é dessa categoria
-# caso positivo, se for uma receita soma ao total, do contrario, subtrai.
+'''inicializa a variavel total com 0, loop for que percorre todas transacoes na lista de transacoes. Como recebe categoria_escolhida, ele verifica se a transacao é dessa categoria
+    caso positivo, se for uma receita soma ao total, do contrario, subtrai.'''
 def relatorio_categoriaEscolhida(lista_transacoes, categoria_escolhida):
     total = 0.0
     for transacao in lista_transacoes:
@@ -43,10 +43,8 @@ def relatorio_categoriaEscolhida(lista_transacoes, categoria_escolhida):
                 total -= transacao.valor
     return total
 
-# a lógica de todas as funções de relatório é basicamente a mesma, a diferença dessas que utilizam datas é que existe a função strftime que, nesse caso, seleciona somente
-# a parte que queremos da data, nos casos, mes e ano.
-
-
+'''A lógica para gerar todos relatórios é basicamente a mesma, com a diferença em que essas utilizam que utilizam datas é a existencia da função strftime que, 
+nesse caso, seleciona somente a parte que queremos da data, nos casos, mes e ano.'''
 def relatorio_meses(lista_transacoes):
     r_mes_ano = {}
     d_mes_ano = {}
@@ -87,6 +85,7 @@ def exibir_transacoes(lista_transacoes):
         print('Tipo: ', transacao.tipo)
         print('Valor: R$', transacao.valor)
         print('Data: ', transacao.data.strftime('%d/%m/%Y'))
+        print('Descrição: ', transacao.descricao)
 
 
 def exibir_relatorio_categoria(lista_transacoes):
