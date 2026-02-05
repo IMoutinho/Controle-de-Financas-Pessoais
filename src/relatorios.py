@@ -41,7 +41,6 @@ def relatorio_categoriaEscolhida(lista_transacoes, categoria_escolhida):
                 total += transacao.valor
             else:
                 total -= transacao.valor
-
     return total
 
 # a lógica de todas as funções de relatório é basicamente a mesma, a diferença dessas que utilizam datas é que existe a função strftime que, nesse caso, seleciona somente
@@ -80,7 +79,7 @@ def relatorio_mes_escolhido(lista_transacoes, mes_ano_escolhido):
 
 def exibir_transacoes(lista_transacoes):
     print("\n===========================================")
-    print(f"{'--- TODAS TRANSAÇÕES ---':^40}")
+    print(f"{'--- EXTRATO DE TRANSAÇÕES ---':^40}")
 
     for transacao in lista_transacoes:
         print("\n-------------------------------------------")

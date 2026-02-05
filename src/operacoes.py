@@ -52,8 +52,7 @@ def exibir_relatorios(lista_transacoes):
         elif relatorio_opcao == '2':
             exibir_relatorio_mes_ano(lista_transacoes)
         elif relatorio_opcao == '3':
-            tipo = input(
-                "Digite o tipo da categoria de transação desejado (receita ou despesa): ")
+            tipo = ler_tipo()
             categoria_escolhida = selecionar_categoria(tipo)
             exibir_relatorio_categoriaEscolhida(
                 lista_transacoes, categoria_escolhida)
@@ -71,7 +70,7 @@ def selecionar_categoria(tipo):
         categorias = constantes.categorias_definidas['receita']
     else:
         categorias = constantes.categorias_definidas['despesa']
-
+    
     print("Categorias disponíveis:\n")
     i = 1
     for categoria in categorias:
@@ -80,7 +79,6 @@ def selecionar_categoria(tipo):
     while True:
         try:
             escolha = int(input("Selecione o número da categoria: "))
-
             if 1 <= escolha <= len(categorias):
                 return categorias[escolha - 1]
 
@@ -88,4 +86,9 @@ def selecionar_categoria(tipo):
                 print("Escolha inválida. Tente novamente.")
 
         except ValueError:
-            print("Entrada inválida. O valor deve ser um número.")
+                print("Entrada inválida. O valor deve ser um número.")
+        
+
+
+
+
