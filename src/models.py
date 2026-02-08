@@ -6,6 +6,7 @@ from datetime import datetime, date
 
 class Transacao:
     '''definição de transação com os atributos de id, valor, tipo, data, categoria e descrição'''
+
     def __init__(self, id, valor, tipo, data, categoria, descricao):
         self.id = id
         self.valor = valor
@@ -13,6 +14,30 @@ class Transacao:
         self.data = data
         self.categoria = categoria
         self.descricao = descricao
+
+
+class Carteira:
+    def __init__(self):
+        self._transacoes = []
+
+    @property
+    def transacoes(self):
+        """Retorna a lista de transações para leitura."""
+        return self._transacoes
+
+    def adicionar_transacao(self, transacao):
+        """Adiciona uma transação à carteira."""
+        self._transacoes.append(transacao)
+
+    def calcular_saldo(self):
+        """Calculo do saldo da carteira"""
+        saldo = 0.0
+        for t in self._transacoes:
+            if t.tipo == 'receita':
+                saldo += t.valor
+            else:
+                saldo -= t.valor
+        return saldo
 
     # Getters
     @property

@@ -76,24 +76,25 @@ def relatorio_mes_escolhido(lista_transacoes, mes_ano_escolhido):
 
 
 def exibir_transacoes(lista_transacoes):
-    print("\n===========================================")
-    print(f"{'--- EXTRATO DE TRANSAÇÕES ---':^40}")
+    print(" ______________________________________________________")
+    print("|    *********** EXTRATO DE TRANSAÇÕES ***********     |")
 
     for transacao in lista_transacoes:
-        print("\n-------------------------------------------")
-        print('ID: ', transacao.id)
-        print('Tipo: ', transacao.tipo)
-        print('Valor: R$', transacao.valor)
-        print('Data: ', transacao.data.strftime('%d/%m/%Y'))
-        print('Descrição: ', transacao.descricao)
+        print("|------------------------------------------------------|")
+        print(f"| ID: {transacao.id:<49}|")
+        print(f"| Tipo: {transacao.tipo:<47}|")
+        print(f"| Valor: R$ {transacao.valor:<43.2f}|")
+        print(f"| Data: {transacao.data.strftime('%d/%m/%Y'):<47}|")
+        print(f"| Descrição: {transacao.descricao:<42}|")
+        print("|______________________________________________________|")
 
 
 def exibir_relatorio_categoria(lista_transacoes):
     dados_categoria = relatorio_categoria(lista_transacoes)
 
     print("\n=======================================================================")
-    print(f"{'CATEGORIA':<20}| {'PERÍODO':^30} | {'TOTAL (R$)':>12}")
-    print("------------------------------------------------------------------------")
+    print(f"{'CATEGORIA':<20} | {'PERÍODO':^30} | {'TOTAL (R$)':>12}")
+    print("-----------------------------------------------------------------------")
 
     for categoria, dados in dados_categoria.items():
         d_inicio = dados['inicio'].strftime('%d/%m/%y')
@@ -109,8 +110,8 @@ def exibir_relatorio_categoriaEscolhida(lista_transacoes, categoria_escolhida):
     total = relatorio_categoriaEscolhida(lista_transacoes, categoria_escolhida)
     inicio, fim = calcula_periodo(lista_transacoes, categoria_escolhida)
     print("\n===============================================")
-    print(f"--- Relatório para Categoria: {categoria_escolhida} ---")
-    print("-------------------------------------------")
+    print(f" {'RELATÓRIO PARA A CATEGORIA:'} {categoria_escolhida}")
+    print("-----------------------------------------------")
 
     if inicio is not None and fim is not None:
         d_inicio = inicio.strftime('%d/%m/%Y')
@@ -126,7 +127,7 @@ def exibir_relatorio_categoriaEscolhida(lista_transacoes, categoria_escolhida):
 def exibir_relatorio_mes_ano(lista_transacoes):
     r_mes_ano, d_mes_ano = relatorio_meses(lista_transacoes)
     print("\n=========================================================")
-    print(f"{'RELATÓRIO DETALHADO MÊS/ANO':^62}")
+    print(f"{'RELATÓRIO DETALHADO MÊS/ANO':^55}")
     print("---------------------------------------------------------")
     print(f"{'MÊS/ANO':<10} | {'RECEITAS':>12} | {'DESPESAS':>12} | {'SALDO DO MÊS':>12}")
     print("---------------------------------------------------------")
@@ -139,11 +140,17 @@ def exibir_relatorio_mes_ano(lista_transacoes):
 
 
 def exibir_relatorio_mes_escolhido(lista_transacoes, mes_ano_escolhido):
-    total_receita, total_despesa = relatorio_mes_escolhido(
-        lista_transacoes, mes_ano_escolhido)
-    print("\n=================================")
-    print(f"\n--- Relatório para Mês/Ano: {mes_ano_escolhido} ---")
-    print(f"Total receitas:: R$ {total_receita:.2f} \n")
-    print("+++++++++++++++++++++++++++++++++")
-    print(f"Total despesas:: R$ {total_despesa:.2f} \n")
-    print("=================================")
+    total_receita, total_despesa = relatorio_mes_escolhido(lista_transacoes, mes_ano_escolhido)
+    
+    # Calculamos o saldo final para mostrar o resultado do mês
+    saldo_final = total_receita + total_despesa
+
+    print(" _________________________________________")
+    print(f"|     RELATÓRIO MENSAL: {mes_ano_escolhido:<14}    |")
+    print("|_________________________________________|")
+    print("|                                         |")
+    print(f"| (+) Receitas:      R$ {total_receita:>14.2f}    |")
+    print(f"| (-) Despesas:      R$ {total_despesa:>14.2f}    |") 
+    print("|-----------------------------------------|")
+    print(f"| (=) Saldo Líquido: R$ {saldo_final:>14.2f}    |")
+    print("|_________________________________________|")

@@ -1,41 +1,45 @@
 '''Menu principal da aplicação.'''
 
-from repositorio_transacoes import carregar_transacoes, salvar_transacoes
-from operacoes import registrar_transacao, calcular_saldo, exibir_relatorios
+from repositorio_transacoes import carregar_carteira, salvar_transacoes
+from operacoes import registrar_transacao, exibir_relatorios
 from relatorios import exibir_transacoes
 
 
 def exibir_menu():
-    print("\n--- Controle de Finanças Pessoais ---")
-    print("1. Registrar Transação (Receita/Despesa)")
-    print("2. Listar todas as transações")
-    print("3. Mostrar Saldo Atual")
-    print("4. Relatórios")
-    print("0. Sair")
+    print(" ______________________________________________________")
+    print("|*********** CONTROLE DE FINANÇAS PESSOAIS *********** |")
+    print(f"{'|1. Registrar Transação (Receita/Despesa)':<50} {'|':>5}")
+    print(f"{'|2. Listar todas as transações':<50}{'|':>6}")
+    print(f"{'|3. Mostrar Saldo Atual':<50}{'|':>6}")
+    print(f"{'|4. Relatórios':<50}{'|':>6}")
+    print(f"{'|0. Sair':<50}{'|':>6}")
+    print(" ******************************************************")
 
 
 def main():
-    lista_transacoes = carregar_transacoes()
+
+    minha_carteira = carregar_carteira()
 
     while True:
         exibir_menu()
         opcao = input("Escolha uma opção: ")
 
         if opcao == '1':
-            registrar_transacao(lista_transacoes)
-            salvar_transacoes(lista_transacoes)
+            registrar_transacao(minha_carteira)
+            salvar_transacoes(minha_carteira.transacoes)
 
         elif opcao == '2':
-            exibir_transacoes(lista_transacoes)
+            exibir_transacoes(minha_carteira.transacoes)
 
         elif opcao == '3':
-            calcular_saldo(lista_transacoes)
+            saldo = minha_carteira.calcular_saldo()
+            print(f"\nSaldo Atual: R$ {saldo:.2f}")
 
         elif opcao == '4':
-            exibir_relatorios(lista_transacoes)
+            exibir_relatorios(minha_carteira.transacoes)
 
         elif opcao == '0':
-            salvar_transacoes(lista_transacoes)
+            salvar_transacoes(minha_carteira.transacoes)
             print("Dados salvos. Até logo!")
             break
         else:

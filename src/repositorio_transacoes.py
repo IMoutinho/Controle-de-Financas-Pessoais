@@ -1,5 +1,5 @@
 '''modulo responsável pela leitura/escrita de transações em arquivo CSV'''
-from models import Transacao
+from models import Transacao, Carteira 
 from datetime import datetime
 
 
@@ -12,9 +12,9 @@ def salvar_transacoes(lista_transacoes, nome_arquivo='data/transacoes.csv'):
             arquivo.write(linha)
 
 
-def carregar_transacoes(nome_arquivo='data/transacoes.csv'):
-    '''função que carrega as transações pra lista de transações. Serve para quando iniciamos a aplicação e fazemos a abertura do arquivo'''
-    transacoes = []
+def carregar_carteira(nome_arquivo='data/transacoes.csv'):
+    '''função que carrega as transações pra um objeto carteira. Serve para quando iniciamos a aplicação e fazemos a abertura do arquivo'''
+    carteira = Carteira()
 
     try:
         with open(nome_arquivo, 'r', encoding='utf-8') as arquivo:
@@ -29,8 +29,8 @@ def carregar_transacoes(nome_arquivo='data/transacoes.csv'):
                                                dados[3], '%d/%m/%Y'),
                                            categoria=dados[4],
                                            descricao=dados[5])
-                transacoes.append(nova_transacao)
+                carteira.adicionar_transacao(nova_transacao)
     except FileNotFoundError:
-        return []
+        return carteira
 
-    return transacoes
+    return carteira

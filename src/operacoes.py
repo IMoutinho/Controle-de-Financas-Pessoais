@@ -6,7 +6,7 @@ import constantes
 from utils import ler_tipo, ler_valor, ler_data
 
 
-def registrar_transacao(lista_transacoes):
+def registrar_transacao(carteira):
     '''Função para registrar a transação dentro da estrutura criada e adicionar essa transação ao final da lista de transações'''
     print("Digite os detalhes da transação:")
     tipo = ler_tipo()
@@ -15,14 +15,14 @@ def registrar_transacao(lista_transacoes):
     categoria = selecionar_categoria(tipo)
     descricao = input("Digite uma descrição para a transação: ")
     nova_transacao = Transacao(
-        id=len(lista_transacoes) + 1,
+        id=len(carteira.transacoes) + 1,
         tipo=tipo,
         valor=valor,
         data=data,
         categoria=categoria,
         descricao=descricao
     )
-    lista_transacoes.append(nova_transacao)
+    carteira.adicionar_transacao(nova_transacao)
     print("Transação registrada com sucesso!")
 
 
@@ -43,7 +43,9 @@ def exibir_relatorios(lista_transacoes):
     '''menu criado para apresentar as opções de relatório '''
     relatorio_opcao = -1
     while relatorio_opcao != 0:
-        print("\n--- Relatórios ---")
+        print("\n===========================================")
+        print(f"{'RELATÓRIOS':^40}")
+        print("-------------------------------------------")
         print("1. Relatório por Categoria")
         print("2. Relatório por Mês/Ano")
         print("3. Relatório Personalizado por Categoria")

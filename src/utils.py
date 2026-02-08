@@ -42,7 +42,7 @@ def ler_data():
     while True:
         data = input("Digite a data da transação (DD/MM/AAAA): ").strip()
         try:
-            datetime.strptime(data, "%d/%m/%Y")
-            return data
+            tipo_data = datetime.strptime(data, "%d/%m/%Y")
+            return tipo_data
         except ValueError:
             print("Erro: Formato inválido. Use DD/MM/AAAA.")
