@@ -1,38 +1,76 @@
-# 💰 Controle de Finanças Pessoais (Projeto C)
+# 💰 Projeto C - Controle de Finanças Pessoais
 
-Sistema de linha de comando (CLI) desenvolvido em **Python** para gestão de receitas e despesas pessoais. Este projeto consolida conceitos de **Programação Orientada a Objetos (POO)**, modularização e manipulação de arquivos.
+Programa desenvolvido em **Python** para gestão de receitas e despesas pessoais. Este projeto foi desenvolvido como parte da avaliação "Semana 4 e 5" (Projeto 1), consolidando conceitos de **Programação Orientada a Objetos (POO)**, modularização, tratamento de erros e manipulação de arquivos.
 
-## 📝 Descrição
-O sistema permite que o usuário registre suas movimentações financeiras, categorizando-as como receitas ou despesas. O objetivo é facilitar o controle financeiro através de relatórios detalhados e persistência de dados, garantindo que as informações não se percam ao fechar o programa.
+## 📝 Descrição do Problema
+Muitas pessoas têm dificuldade em acompanhar para onde vai o seu dinheiro. Este sistema resolve esse problema permitindo o registro rápido de transações, a categorização de gastos e a geração automática de relatórios. O objetivo é oferecer uma visão clara do saldo financeiro e do histórico de movimentações, garantindo que os dados sejam salvos para consultas futuras.
 
-## ⚙️ Funcionalidades
+## ⚙️ Principais Funcionalidades
 
-* **Cadastro de Transações:** Registro completo com ID automático, tipo (receita/despesa), valor, data, categoria e descrição.
-* **Gestão via Carteira:** Utilização da classe `Carteira` para gerenciar a lista de objetos `Transacao`.
-* **Persistência de Dados:** Carregamento e salvamento automático em arquivo CSV (`data/transacoes.csv`).
+* **Registro de Transações:** Cadastro completo com validação de dados (ID automático, valor numérico, data formatada, categoria e descrição).
+* **Gestão Orientada a Objetos:** Implementação da classe 'Carteira' para gerenciar listas de objetos `Transacao`, aplicando conceitos de encapsulamento e composição.
+* **Persistência de Dados:** Leitura e escrita automática em arquivo CSV (`data/transacoes.csv`), garantindo que as informações sejam salvas ao sair do programa.
 * **Relatórios Detalhados:**
-    * Extrato completo de transações.
-    * Relatório agrupado por Categoria (com período de apuração).
-    * Relatório mensal (Receitas vs Despesas e Saldo Líquido).
-* **Validações Robustas:** Tratamento de erros para impedir datas inválidas, valores negativos ou tipos incorretos.
+    * Extrato completo de transações em formato de tabela.
+    * Relatório por Categoria (com período de apuração).
+    * Relatório Mensal (Total de Receitas vs Despesas e Saldo Líquido formatado).
+* **Validações Robustas:** O sistema impede entradas inválidas (ex: datas inexistentes ou valores não numéricos) através de tratamento de exceções (`try/except`).
 
-## 📂 Estrutura do Projeto
+## 📂 Estrutura de Diretórios
 
-O código foi organizado em módulos para facilitar a manutenção e leitura:
+O código foi organizado em módulos específicos para facilitar a manutenção e a escalabilidade:
 
 ```text
 projeto-financas/
 │
-├── data/                   # Pasta onde o arquivo .csv é salvo
-│   └── transacoes.csv      # Banco de dados (criado automaticamente)
+├── data/                      # Diretório para armazenamento de dados
+│   └── transacoes.csv         # Banco de dados persistente (gerado automaticamente)
 │
-├── src/                    # Código fonte do projeto
-│   ├── main.py             # Ponto de entrada (Menu Principal)
-│   ├── models.py           # Classes: Transacao e Carteira
-│   ├── repositorio_transacoes.py  # Leitura e Escrita do CSV
-│   ├── operacoes.py        # Lógica de registro e orquestração
-│   ├── relatorios.py       # Funções de exibição e cálculo de relatórios
-│   ├── utils.py            # Validadores (ler_data, ler_valor, etc.)
-│   └── constantes.py       # Listas de categorias fixas
+├── src/                       # Código fonte da aplicação
+│   ├── main.py                # Ponto de entrada (Menu Principal)
+│   ├── models.py              # Classes: Transacao e Carteira
+│   ├── repositorio_transacoes.py  # Leitura e Escrita do CSV (camada de dados)
+│   ├── operacoes.py           # Lógica de registro e orquestração das ações
+│   ├── relatorios.py          # Funções de exibição formatada (Tabelas e Cards)
+│   ├── utils.py               # Validadores de entrada (ler_data, ler_valor, ler_tipo)
+│   └── constantes.py          # Listas de categorias pré-definidas (Receita/Despesa)
 │
-└── README.md               # Documentação do projeto
+└── README.md                  # Documentação do projeto
+
+## 🚀 Como Executar o Projeto
+
+Siga o passo a passo abaixo para rodar o sistema no seu computador.
+
+### Pré-requisitos
+* Ter o **Python 3**.
+* Não é necessário instalar bibliotecas externas (o projeto utiliza apenas bibliotecas padrão como 'datetime').
+
+### Passo a Passo
+
+1.  **Clone o repositório** (ou baixe os arquivos):
+    ```bash
+    git clone [https://github.com/SEU_USUARIO/NOME_DO_REPO.git](https://github.com/SEU_USUARIO/NOME_DO_REPO.git)
+    ```
+
+2.  **Acesse a pasta do projeto:**
+    ```bash
+    cd projeto-financas
+    ```
+
+3.  **Verifique a pasta de dados:**
+    O sistema salva os arquivos na pasta `data/`. Certifique-se de que ela existe:
+    * **Linux/Mac:**
+      ```bash
+      mkdir data
+      ```
+    * **Windows:**
+      Crie uma nova pasta chamada `data` dentro da pasta do projeto (manualmente ou via terminal).
+
+4.  **Execute o programa:**
+    ```bash
+    python src/main.py
+    ```
+
+5.  **Utilização:**
+    * Navegue pelo menu digitando o número da opção desejada e pressionando Enter.
+    * Ao selecionar a opção **0 (Sair)**, o sistema salva automaticamente todas as alterações no arquivo CSV.
