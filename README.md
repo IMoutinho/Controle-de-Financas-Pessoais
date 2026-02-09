@@ -36,6 +36,7 @@ projeto-financas/
 │   └── constantes.py          # Listas de categorias pré-definidas (Receita/Despesa)
 │
 └── README.md                  # Documentação do projeto
+```
 
 # 🚀 Como Executar o Projeto
 
