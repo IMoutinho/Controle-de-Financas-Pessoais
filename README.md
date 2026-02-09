@@ -51,7 +51,7 @@ Siga o passo a passo abaixo para rodar o sistema no seu computador.
 
 1.  **Clone o repositório** (ou baixe os arquivos):
     ```bash
-    git clone [https://github.com/SEU_USUARIO/NOME_DO_REPO.git](https://github.com/SEU_USUARIO/NOME_DO_REPO.git)
+    git clone https://github.com/IMoutinho/Controle-de-Financas-Pessoais
     ```
 
 2.  **Acesse a pasta do projeto:**
