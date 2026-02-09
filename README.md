@@ -16,7 +16,7 @@ Muitas pessoas têm dificuldade em acompanhar para onde vai o seu dinheiro. Este
     * Relatório Mensal (Total de Receitas vs Despesas e Saldo Líquido formatado).
 * **Validações Robustas:** O sistema impede entradas inválidas (ex: datas inexistentes ou valores não numéricos) através de tratamento de exceções (`try/except`).
 
-## 📂 Estrutura de Diretórios
+# 📂 Estrutura de Diretórios
 
 O código foi organizado em módulos específicos para facilitar a manutenção e a escalabilidade:
 
@@ -37,7 +37,7 @@ projeto-financas/
 │
 └── README.md                  # Documentação do projeto
 
-## 🚀 Como Executar o Projeto
+# 🚀 Como Executar o Projeto
 
 Siga o passo a passo abaixo para rodar o sistema no seu computador.
 
