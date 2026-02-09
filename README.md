@@ -42,6 +42,7 @@ projeto-financas/
 Siga o passo a passo abaixo para rodar o sistema no seu computador.
 
 ### Pré-requisitos
+
 * Ter o **Python 3**.
 * Não é necessário instalar bibliotecas externas (o projeto utiliza apenas bibliotecas padrão como 'datetime').
 
