@@ -4,7 +4,8 @@ from datetime import datetime
 
 
 def salvar_transacoes(lista_transacoes, nome_arquivo='data/transacoes.csv'):
-    '''utiliza a função pra abrir o arquivo do tipo csv no modo de escrita, passa por todas as transações, registrando-as no formato csv(separado por virgulas) e escreve a linha'''
+    '''utiliza a função pra abrir o arquivo do tipo csv no modo de escrita, passa por todas as transações, registrando-as no formato csv(separado por virgulas) 
+    e escreve a linha'''
     with open(nome_arquivo, 'w', encoding='utf-8') as arquivo:
         for transacao in lista_transacoes:
             data_formatada = transacao.data.strftime('%d/%m/%Y')

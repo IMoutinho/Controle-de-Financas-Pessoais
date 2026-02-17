@@ -89,18 +89,9 @@ class Carteira:
 
     @data.setter
     def data(self, valor_data):
-        if isinstance(valor_data, (datetime, date)):
-            self._data = valor_data
-
-        elif isinstance(valor_data, str):
-            try:
-                self._data = datetime.strptime(valor_data, "%d/%m/%Y")
-            except ValueError:
-                print(f"Data inválida. Utilizando a data atual")
-                self._data = datetime.now()
-
-        else:
-            raise ValueError('Data deve estar no formato DD/MM/AAAA.')
+        if not isinstance(valor_data, (datetime, date)):
+            raise TypeError("A data deve ser um objeto do tipo datetime ou date.")
+        self._data = valor_data
 
     @categoria.setter
     def categoria(self, valor_cat):
